@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface RepositoryInterface
+interface ProductRepositoryInterface
 {
     public function get(int $id);
 

@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 
-class ProductRepository implements RepositoryInterface
+class ProductRepository implements ProductRepositoryInterface
 {
     use InteractsWithJsonFile;
 
@@ -28,11 +29,14 @@ class ProductRepository implements RepositoryInterface
     public function create($data)
     {
         $id = Uuid::uuid4()->toString();
+        $data['created_at'] = Carbon::now();
+        $data['updated_at'] = Carbon::now();
         $this->content[$id] = $data;
     }
 
     public function update($id, $data)
     {
+        $data['updated_at'] = Carbon::now();
         $this->content[$id] = $data;
     }
 
