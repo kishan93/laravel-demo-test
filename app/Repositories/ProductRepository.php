@@ -29,6 +29,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function create($data)
     {
         $id = Uuid::uuid4()->toString();
+        $data['id'] = $id;
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
         $this->content[$id] = $data;
@@ -37,7 +38,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function update($id, $data)
     {
         $data['updated_at'] = Carbon::now();
-        $this->content[$id] = $data;
+        $this->content[$id] = [...$this->content[$id], ...$data];
     }
 
     public function delete($id)

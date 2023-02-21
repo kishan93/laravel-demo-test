@@ -33,13 +33,7 @@
                 </tr>
               </template>
               <template v-for="(product, index) in productsSorted">
-                <tr class="">
-                  <td class="px-4 py-2">{{ product.name }}</td>
-                  <td class="px-4 py-2">{{ product.quantity }}</td>
-                  <td class="px-4 py-2">{{ product.price }}</td>
-                  <td class="px-4 py-2">{{ formatDateTime(product.created_at) }}</td>
-                  <td class="px-4 py-2">{{ product.quantity * product.price }}</td>
-                </tr>
+                <ProductRow :product="product"/>
               </template>
             </tbody>
             <tfoot>
@@ -60,6 +54,7 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 import { Link } from '@inertiajs/vue3'
 import { computed } from 'vue'
 import moment from 'moment'
+import ProductRow from './ProductRow.vue'
 
 const props = defineProps({
   products: Object,
@@ -75,9 +70,6 @@ const totalValue = computed(() => {
     .map(p => p.price * p.quantity).reduce((acc, value) => acc + value, 0)
 })
 
-const formatDateTime = (datetime) => {
-  return moment(datetime).format("MM/DD/YYYY HH:mm")
-}
 
 </script>
 
