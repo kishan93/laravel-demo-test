@@ -19,3 +19,12 @@ Solution requirements:
 Use PHP / Html / Javascript / CSS.
 Use Twitter Bootstrap.
 The form should be submitting the data and updating the data being displayed on the page using Ajax.
+
+
+# Setup
+
+- create database
+- setup .env
+- migrate database
+- start server
+- register new user and login
