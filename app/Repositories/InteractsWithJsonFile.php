@@ -2,19 +2,24 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\Log;
+
 trait InteractsWithJsonFile
 {
+    protected function getFileName()
+    {
+        $classNameHash = md5(static::class);
+        return storage_path('app/'. $classNameHash. '.json');
+    }
     public function save($content)
     {
-        $fileName = static::class;
-        file_put_contents(storage_path('app/'. $fileName, '.json'), json_encode($content));
+        file_put_contents($this->getFileName(), json_encode($content));
     }
 
     public function read()
     {
-        $fileName = static::class;
         try {
-            $content = file_get_contents(storage_path('app/'. $fileName, '.json'));
+            $content = file_get_contents($this->getFileName(), '.json');
             return json_decode($content, true);
         } catch (\Exception $exception){
             return [];
